@@ -1,0 +1,614 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TrustMedAI 2027</title>
+<meta name="description" content="TrustMedAI 2027: Workshop and Benchmark Challenge on Multimodal and Trustworthy AI for Neurological and Cardiac Disorders, held with IEEE ISBI 2027 in Lausanne, Switzerland.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#fbfbfa; --surface:#ffffff; --surface-2:#f2f4f6;
+  --ink:#14202b; --ink-2:#4a5866; --line:#e2e6ea;
+  --navy:#0f2a44; --neuro:#2f6fb3; --cardio:#c8483b; --accent:#1f8a7a;
+  --tbd-bg:#fff4d6; --tbd-ink:#7a5a00;
+  --radius:12px; --max:1100px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e141a; --surface:#151d25; --surface-2:#1b252f;
+    --ink:#e8edf2; --ink-2:#a3b0bd; --line:#26323d;
+    --navy:#0a1622; --neuro:#6aa6e6; --cardio:#ec7a6d; --accent:#4fc3b0;
+    --tbd-bg:#3a3018; --tbd-ink:#f2d27a;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0e141a; --surface:#151d25; --surface-2:#1b252f;
+  --ink:#e8edf2; --ink-2:#a3b0bd; --line:#26323d;
+  --navy:#0a1622; --neuro:#6aa6e6; --cardio:#ec7a6d; --accent:#4fc3b0;
+  --tbd-bg:#3a3018; --tbd-ink:#f2d27a;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--neuro)}
+h1,h2,h3{font-family:"Source Serif 4",Georgia,serif;line-height:1.2;margin:0 0 .5em}
+h2{font-size:clamp(1.6rem,3vw,2.1rem)}
+h3{font-size:1.15rem;font-family:Inter,sans-serif;font-weight:600}
+p{margin:0 0 1em}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
+section{padding:72px 0;border-top:1px solid var(--line)}
+section:nth-of-type(even){background:var(--surface-2)}
+.eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:.6em}
+.lead{font-size:1.1rem;color:var(--ink-2);max-width:760px}
+.tbd{display:inline-block;background:var(--tbd-bg);color:var(--tbd-ink);font-size:.75rem;font-weight:600;padding:1px 8px;border-radius:999px;vertical-align:middle}
+
+/* Nav */
+header.nav{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{font-weight:700;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.brand span{color:var(--accent)}
+.nav ul{list-style:none;display:flex;gap:20px;margin:0;padding:0}
+.nav ul a{color:var(--ink-2);text-decoration:none;font-size:.92rem;font-weight:500}
+.nav ul a:hover,.nav ul a.active{color:var(--ink)}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:8px;padding:6px 10px;color:var(--ink);font:inherit}
+@media (max-width:900px){
+  .menu-btn{display:block}
+  .nav ul{display:none;position:absolute;top:60px;left:0;right:0;flex-direction:column;gap:0;background:var(--surface);border-bottom:1px solid var(--line)}
+  .nav ul.open{display:flex}
+  .nav ul a{display:block;padding:12px 16px}
+}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#163d5f 60%,#1d4a52 100%);color:#fff;padding:96px 0 80px;border:0}
+.hero .eyebrow{color:#8fd8cb}
+.hero h1{font-size:clamp(2.2rem,5.5vw,3.6rem);margin-bottom:.3em}
+.hero .sub{font-size:clamp(1.05rem,2vw,1.3rem);color:#d2dde7;max-width:780px}
+.meta{display:flex;flex-wrap:wrap;gap:10px 24px;margin:28px 0 32px;color:#d2dde7;font-size:.95rem}
+.meta b{color:#fff}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;padding:11px 20px;border-radius:999px;font-weight:600;text-decoration:none;font-size:.95rem}
+.btn.primary{background:#fff;color:var(--navy)}
+.btn.ghost{border:1px solid rgba(255,255,255,.45);color:#fff}
+.chips{display:flex;gap:8px;margin-top:36px;flex-wrap:wrap}
+.chip{font-size:.8rem;padding:4px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.3);color:#e4ecf3}
+.chip.n{border-color:#6aa6e6}.chip.c{border-color:#ec7a6d}
+
+/* Grids & cards */
+.grid{display:grid;gap:20px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.card p:last-child{margin:0}
+.card .num{font-family:"Source Serif 4",serif;font-size:1.6rem;color:var(--accent);line-height:1}
+.card.neuro{border-top:3px solid var(--neuro)}
+.card.cardio{border-top:3px solid var(--cardio)}
+ul.clean{padding-left:1.1em;margin:0}
+ul.clean li{margin-bottom:.35em}
+.split{display:grid;grid-template-columns:1.3fr 1fr;gap:40px}
+@media (max-width:800px){.split{grid-template-columns:1fr}}
+
+/* Pipeline */
+.pipeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:28px 0 8px;counter-reset:s}
+.pipeline div{padding:16px;border:1px solid var(--line);background:var(--surface);position:relative;font-size:.92rem}
+.pipeline div:first-child{border-radius:var(--radius) 0 0 var(--radius)}
+.pipeline div:last-child{border-radius:0 var(--radius) var(--radius) 0}
+.pipeline strong{display:block;margin-bottom:4px}
+@media (max-width:700px){.pipeline{grid-template-columns:1fr 1fr}.pipeline div{border-radius:0!important}}
+
+/* Tables */
+.table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;font-size:.95rem}
+.table th,.table td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.table th{background:var(--surface-2);font-weight:600;font-size:.85rem;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}
+.table tr:last-child td{border-bottom:0}
+.table td.t{white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--ink-2);width:1%}
+.table-scroll{overflow-x:auto}
+
+/* People */
+.person{display:flex;gap:16px;align-items:flex-start}
+.avatar{flex:0 0 72px;height:72px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:var(--ink-2);overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:cover}
+.person .aff{color:var(--ink-2);font-size:.92rem;margin-bottom:.5em}
+
+/* Challenge band */
+.challenge-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.notice{border-left:4px solid var(--accent);background:var(--surface);padding:14px 18px;border-radius:0 var(--radius) var(--radius) 0;margin:20px 0}
+
+/* Imaging figures */
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;margin-top:28px}
+figure.img{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+figure.img svg,figure.img img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;background:#000}
+figure.img figcaption{padding:14px 18px;font-size:.92rem;color:var(--ink-2)}
+figure.img figcaption strong{color:var(--ink);display:block;margin-bottom:2px}
+.mod{display:inline-block;font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:1px 8px;border-radius:999px;margin-right:6px;vertical-align:middle}
+.mod.n{background:color-mix(in srgb,var(--neuro) 15%,transparent);color:var(--neuro)}
+.mod.c{background:color-mix(in srgb,var(--cardio) 15%,transparent);color:var(--cardio)}
+.fine{font-size:.85rem;color:var(--ink-2);margin-top:14px}
+
+footer{background:var(--navy);color:#b8c6d3;padding:40px 0;font-size:.9rem}
+footer a{color:#fff}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">TrustMed<span>AI</span> 2027</a>
+    <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('navlist').classList.toggle('open')">Menu</button>
+    <ul id="navlist">
+      <li><a href="#about">About</a></li>
+      <li><a href="#topics">Topics</a></li>
+      <li><a href="#cfp">Call for Papers</a></li>
+      <li><a href="#dates">Dates</a></li>
+      <li><a href="#program">Program</a></li>
+      <li><a href="#speakers">Speakers</a></li>
+      <li><a href="#challenge">Challenge</a></li>
+      <li><a href="#organizers">Organizers</a></li>
+      <li><a href="#committee">Advisors</a></li>
+      <li><a href="#pc">Committee</a></li>
+    </ul>
+  </div>
+</header>
+
+<!-- ========== HERO ========== -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow">IEEE ISBI 2027 Workshop &amp; Benchmark Challenge</div>
+    <h1>TrustMedAI 2027</h1>
+    <p class="sub">Multimodal and Trustworthy AI for Neurological and Cardiac Disorders</p>
+    <div class="meta">
+      <div><b>When</b> · Half-day, during ISBI 2027 (25–28 May 2027) <span class="tbd">exact day TBD</span></div>
+      <div><b>Where</b> · SwissTech Convention Center, EPFL, Lausanne, Switzerland</div>
+    </div>
+    <div class="btns">
+      <a class="btn primary" href="#cfp">Submit a paper</a>
+      <a class="btn ghost" href="#challenge">Join the challenge</a>
+      <a class="btn ghost" href="https://biomedicalimaging.org/2027/" target="_blank" rel="noopener">ISBI 2027 ↗</a>
+    </div>
+    <div class="chips">
+      <span class="chip n">Stroke &amp; cerebrovascular</span>
+      <span class="chip n">Neurodegeneration · Epilepsy · Brain tumors</span>
+      <span class="chip c">Heart failure · Arrhythmia</span>
+      <span class="chip c">Structural heart disease</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about">
+  <div class="wrap split">
+    <div>
+      <div class="eyebrow">About the workshop</div>
+      <h2>From accurate models to clinically trustworthy ones</h2>
+      <p class="lead">Neurological and cardiac disorders are among the leading causes of death and disability worldwide, yet many remain hard to diagnose early, monitor over time, and treat effectively.</p>
+      <p>TrustMedAI brings the biomedical imaging community together with neurologists, cardiologists, neuroradiologists, interventional radiologists, neurosurgeons, cardiac surgeons, and imaging scientists. Our focus is AI that is multimodal, robust across institutions and populations, interpretable, uncertainty-aware, fair, and ready for high-stakes clinical use.</p>
+      <p>We give special attention to areas that have received comparatively little attention from the AI community — <strong>stroke and cerebrovascular disease</strong> on the neurological side, and <strong>heart failure, arrhythmia, and structural heart disease</strong> on the cardiac side — and we treat datasets and benchmarks as first-class contributions.</p>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Modalities</h3>
+        <p>MRI, CT, PET, ultrasound &amp; echocardiography, angiography (DSA, MRA, CTA, coronary), digital pathology, and video-based assessment.</p>
+      </div>
+      <div class="card">
+        <h3>Fused with</h3>
+        <p>Biosignals (EEG, ECG), genomics, laboratory data, EHRs and clinical notes — via vision-language, foundation, and world models.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== IMAGING ========== -->
+<section id="imaging">
+  <div class="wrap">
+    <div class="eyebrow">Imaging in focus</div>
+    <h2>Angiography meets trustworthy AI</h2>
+    <p class="lead">Vascular imaging is central to both disease domains. We want models that find what matters on MR and CT angiography and also say how sure they are.</p>
+    <div class="figs">
+      <figure class="img">
+        <!-- To use a real image: replace this <svg> with <img src="assets/mra.jpg" alt="MR angiography of the circle of Willis"> -->
+        <svg viewBox="0 0 400 300" role="img" aria-label="Schematic MR angiography maximum intensity projection of the circle of Willis, with an AI-flagged middle cerebral artery aneurysm">
+          <defs>
+            <radialGradient id="mraBg" cx="50%" cy="55%" r="65%"><stop offset="0" stop-color="#202020"/><stop offset="1" stop-color="#000"/></radialGradient>
+            <filter id="mraGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect width="400" height="300" fill="url(#mraBg)"/>
+          <ellipse cx="200" cy="160" rx="170" ry="135" fill="#2b2b2b" opacity=".35"/>
+          <g fill="none" stroke="#eeeeee" stroke-linecap="round" filter="url(#mraGlow)">
+            <path d="M175 300 C177 286 190 276 200 270 M225 300 C223 286 210 276 200 270" stroke-width="5"/>
+            <path d="M200 270 L200 200" stroke-width="6"/>
+            <path d="M200 200 C186 197 168 196 156 198 C132 202 112 226 100 258 C96 270 100 282 106 290" stroke-width="4.5"/>
+            <path d="M200 200 C214 197 232 196 244 198 C268 202 288 226 300 258 C304 270 300 282 294 290" stroke-width="4.5"/>
+            <path d="M156 198 C154 180 154 164 156 152 M244 198 C246 180 246 164 244 152" stroke-width="2.8"/>
+            <path d="M156 152 C152 162 145 170 140 178 M244 152 C248 162 255 170 260 178" stroke-width="7"/>
+            <path d="M156 152 C136 149 116 146 94 141 M244 152 C264 149 284 146 306 141" stroke-width="5"/>
+            <path d="M94 141 C80 128 66 112 58 92 M94 141 C76 146 60 156 48 172 M94 141 C80 138 66 134 50 130" stroke-width="3"/>
+            <path d="M306 141 C320 128 334 112 342 92 M306 141 C324 146 340 156 352 172 M306 141 C320 138 334 134 350 130" stroke-width="3"/>
+            <path d="M156 152 C168 140 180 130 192 125 C194 104 193 74 190 40 M244 152 C232 140 220 130 208 125 C206 104 207 74 210 40" stroke-width="4"/>
+            <path d="M192 125 L208 125" stroke-width="2.6"/>
+            <path d="M58 92 C52 80 50 70 52 58 M342 92 C348 80 350 70 348 58 M48 172 C40 182 36 192 34 204 M352 172 C360 182 364 192 366 204 M190 40 C182 32 176 26 170 20 M210 40 C218 32 224 26 230 20" stroke-width="1.6" opacity=".75"/>
+          </g>
+          <circle cx="92" cy="140" r="7" fill="#fff" filter="url(#mraGlow)"/>
+          <circle cx="92" cy="140" r="17" fill="none" stroke="#4fc3b0" stroke-width="2" stroke-dasharray="4 3"/>
+          <path d="M80 127 L64 70" stroke="#4fc3b0" stroke-width="1.5"/>
+          <g font-family="Inter,system-ui,sans-serif">
+            <rect x="12" y="30" width="132" height="40" rx="6" fill="rgba(0,0,0,.75)" stroke="#4fc3b0"/>
+            <text x="22" y="47" fill="#fff" font-size="12" font-weight="600">MCA aneurysm</text>
+            <text x="22" y="62" fill="#8fd8cb" font-size="11">p = 0.94 ± 0.03</text>
+            <text x="388" y="20" fill="#9a9a9a" font-size="11" text-anchor="end">MRA · MIP</text>
+            <text x="12" y="290" fill="#9a9a9a" font-size="11">R</text>
+            <text x="388" y="290" fill="#9a9a9a" font-size="11" text-anchor="end">L</text>
+          </g>
+        </svg>
+        <figcaption><span class="mod n">Neuro</span><strong>MR angiography: circle of Willis</strong>Aneurysm detection on a maximum intensity projection, reported with a calibrated confidence rather than a bare label.</figcaption>
+      </figure>
+      <figure class="img">
+        <!-- To use a real image: replace this <svg> with <img src="assets/ccta.jpg" alt="Coronary CT angiography volume rendering"> -->
+        <svg viewBox="0 0 400 300" role="img" aria-label="Schematic coronary CT angiography volume rendering of the heart, with an AI-estimated left anterior descending artery stenosis and its uncertainty">
+          <defs>
+            <radialGradient id="ctaBg" cx="50%" cy="50%" r="70%"><stop offset="0" stop-color="#16161a"/><stop offset="1" stop-color="#000"/></radialGradient>
+            <radialGradient id="heartG" cx="45%" cy="40%" r="65%"><stop offset="0" stop-color="#d3a08f"/><stop offset=".6" stop-color="#9a5e50"/><stop offset="1" stop-color="#3e2019"/></radialGradient>
+            <linearGradient id="aoG" x1="0" x2="1"><stop offset="0" stop-color="#8f5c4f"/><stop offset=".5" stop-color="#d6aa98"/><stop offset="1" stop-color="#8f5c4f"/></linearGradient>
+            <filter id="ctaGlow" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="1.5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          </defs>
+          <rect width="400" height="300" fill="url(#ctaBg)"/>
+          <path d="M182 92 C178 60 186 34 214 26 C240 20 262 30 270 48" fill="none" stroke="url(#aoG)" stroke-width="26" stroke-linecap="round"/>
+          <path d="M226 96 C234 76 246 62 262 56" fill="none" stroke="#8a5649" stroke-width="22" stroke-linecap="round"/>
+          <path d="M200 86 C252 74 312 104 318 160 C322 214 272 258 214 282 C158 258 100 220 94 164 C90 116 140 90 200 86 Z" fill="url(#heartG)"/>
+          <path d="M214 282 C158 258 100 220 94 164" fill="none" stroke="#000" stroke-opacity=".25" stroke-width="6"/>
+          <g fill="none" stroke="#fff1e4" stroke-linecap="round" filter="url(#ctaGlow)">
+            <path d="M204 104 C216 108 226 112 234 116" stroke-width="5"/>
+            <path d="M234 116 C230 146 224 172 220 186" stroke-width="4.5"/>
+            <path d="M220 186 L218 194" stroke-width="1.8"/>
+            <path d="M218 194 C214 220 212 244 214 272" stroke-width="4"/>
+            <path d="M228 150 C248 160 266 172 280 192 M220 204 C238 212 254 224 262 240" stroke-width="2.6"/>
+            <path d="M234 116 C262 120 288 136 302 160 C308 176 308 192 302 208" stroke-width="4"/>
+            <path d="M296 150 C288 170 282 190 280 210" stroke-width="2.4"/>
+            <path d="M192 104 C170 108 146 120 128 140 C112 160 110 186 118 208 C128 228 148 246 172 262" stroke-width="4.5"/>
+            <path d="M120 186 C138 194 154 202 166 214" stroke-width="2.4"/>
+          </g>
+          <ellipse cx="219" cy="190" rx="15" ry="18" fill="none" stroke="#ec7a6d" stroke-width="2" stroke-dasharray="4 3"/>
+          <path d="M233 196 L300 236" stroke="#ec7a6d" stroke-width="1.5"/>
+          <g font-family="Inter,system-ui,sans-serif">
+            <rect x="256" y="236" width="134" height="40" rx="6" fill="rgba(0,0,0,.75)" stroke="#ec7a6d"/>
+            <text x="266" y="253" fill="#fff" font-size="12" font-weight="600">LAD stenosis ≈ 70%</text>
+            <text x="266" y="268" fill="#f3b1a8" font-size="11">95% CI 62–78%</text>
+            <text x="388" y="20" fill="#9a9a9a" font-size="11" text-anchor="end">CCTA · VR</text>
+            <text x="12" y="20" fill="#9a9a9a" font-size="11">Ao</text>
+          </g>
+        </svg>
+        <figcaption><span class="mod c">Cardiac</span><strong>Coronary CT angiography</strong>Stenosis grading on a volume rendering, with an uncertainty interval that supports deferral to a clinician when the model is unsure.</figcaption>
+      </figure>
+    </div>
+    <p class="fine">Illustrative schematics, not patient data. AI outputs shown are examples.</p>
+  </div>
+</section>
+
+<!-- ========== TOPICS ========== -->
+<section id="topics">
+  <div class="wrap">
+    <div class="eyebrow">Scope</div>
+    <h2>Across the full clinical pipeline</h2>
+    <div class="pipeline">
+      <div><strong>Diagnosis &amp; early detection</strong>Biomarkers, staging, risk prediction, deferral to clinicians</div>
+      <div><strong>Treatment &amp; intervention</strong>Segmentation, procedural planning, image-guided and intra-operative imaging</div>
+      <div><strong>Management &amp; monitoring</strong>Longitudinal modeling, VLM reporting, stroke and cardiac care units</div>
+      <div><strong>Outcomes &amp; recovery</strong>Rehabilitation, survival, treatment response, complications</div>
+    </div>
+    <h3 style="margin-top:40px">Six main directions</h3>
+    <div class="grid g3">
+      <div class="card"><div class="num">01</div><h3>Multimodal AI</h3><p>Fusion of imaging, signals, genomics and records for neurological and cardiac disorders.</p></div>
+      <div class="card"><div class="num">02</div><h3>Neurosymbolic &amp; knowledge-guided AI</h3><p>Combining learning with guidelines, anatomical and physiological constraints, and causal reasoning.</p></div>
+      <div class="card"><div class="num">03</div><h3>Trustworthy &amp; explainable AI</h3><p>Uncertainty quantification, calibration, interpretability, fairness and bias auditing.</p></div>
+      <div class="card"><div class="num">04</div><h3>Diagnosis-to-outcomes continuum</h3><p>AI that follows the patient from detection through treatment to recovery.</p></div>
+      <div class="card"><div class="num">05</div><h3>Datasets, benchmarks &amp; generalization</h3><p>New cohorts, annotation protocols, and evaluation across institutions and populations.</p></div>
+      <div class="card"><div class="num">06</div><h3>Translation &amp; human–AI collaboration</h3><p>Verification, validation, regulatory readiness, deployment and trust calibration.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CALL FOR PAPERS ========== -->
+<section id="cfp">
+  <div class="wrap">
+    <div class="eyebrow">Call for papers</div>
+    <h2>What we're looking for</h2>
+    <p class="lead">We welcome work that bridges methodological advances with clinically meaningful problems, and that evaluates models beyond accuracy — by calibration, generalization, fairness, robustness, interpretability, and deployment readiness.</p>
+    <div class="grid g2" style="margin-top:28px">
+      <div class="card neuro">
+        <h3>Neurological focus</h3>
+        <ul class="clean">
+          <li>Stroke and cerebrovascular disease (aneurysm, ischemic and hemorrhagic stroke)</li>
+          <li>Neurodegenerative disorders and dementia</li>
+          <li>Epilepsy</li>
+          <li>Brain tumors and neuro-oncology</li>
+          <li>Other neurological conditions</li>
+        </ul>
+      </div>
+      <div class="card cardio">
+        <h3>Cardiac focus</h3>
+        <ul class="clean">
+          <li>Heart failure</li>
+          <li>Arrhythmia and electrophysiological interventions</li>
+          <li>Structural heart disease and repair</li>
+          <li>Coronary artery disease</li>
+        </ul>
+      </div>
+    </div>
+    <div class="grid g3" style="margin-top:20px">
+      <div class="card">
+        <h3>Methods</h3>
+        <p>Multimodal fusion; foundation and vision-language models; domain adaptation; uncertainty; explainability; federated and privacy-preserving learning; robustness to distribution shift; causal, neurosymbolic and world-model approaches.</p>
+      </div>
+      <div class="card">
+        <h3>Datasets &amp; benchmarks</h3>
+        <p>Reviewed on equal footing with methods papers, judged on clinical relevance, data quality, documentation, annotation rigor, licensing and accessibility, reproducibility, and community reuse.</p>
+      </div>
+      <div class="card">
+        <h3>Submission format</h3>
+        <p>Page limit, template, and review process <span class="tbd">TBD</span><br>Submission portal: <span class="tbd">link TBD</span><br>Proceedings: <span class="tbd">TBD</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== DATES ========== -->
+<section id="dates">
+  <div class="wrap">
+    <div class="eyebrow">Important dates</div>
+    <h2>Timeline</h2>
+    <p class="lead">All deadlines 11:59 pm US Eastern Time, following ISBI 2027.</p>
+    <div class="table-scroll">
+    <table class="table">
+      <thead><tr><th>Date</th><th>Workshop</th><th>Challenge</th></tr></thead>
+      <tbody>
+        <tr><td class="t"><span class="tbd">TBD</span></td><td>Call for papers opens</td><td>Training data released</td></tr>
+        <tr><td class="t">26 Jan 2027</td><td>Workshop paper submission (ISBI deadline)</td><td>—</td></tr>
+        <tr><td class="t"><span class="tbd">TBD</span></td><td>Author notification</td><td>Test data / submission phase opens</td></tr>
+        <tr><td class="t">26 Feb 2027</td><td>—</td><td>Challenge paper submission (ISBI deadline)</td></tr>
+        <tr><td class="t">1 Mar 2027</td><td>—</td><td>Challenge paper notification</td></tr>
+        <tr><td class="t">15 Mar 2027</td><td>Camera-ready <span class="tbd">confirm</span></td><td>Challenge final submission</td></tr>
+        <tr><td class="t">25–28 May 2027</td><td colspan="2">Workshop &amp; challenge session at ISBI 2027, Lausanne</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROGRAM ========== -->
+<section id="program">
+  <div class="wrap">
+    <div class="eyebrow">Program</div>
+    <h2>Half-day schedule</h2>
+    <p class="lead">Tentative. Times will be fixed once ISBI assigns the session slot.</p>
+    <div class="table-scroll">
+    <table class="table">
+      <thead><tr><th>Duration</th><th>Session</th></tr></thead>
+      <tbody>
+        <tr><td class="t">10 min</td><td><strong>Opening remarks</strong><br>Scope, motivation, and format overview by the organizers</td></tr>
+        <tr><td class="t">25 min</td><td><strong>Keynote 1 — Multimodal AI</strong><br>Ulas Bagci, Northwestern University</td></tr>
+        <tr><td class="t">25 min</td><td><strong>Keynote 2 — Graph Neural Networks</strong><br>Islem Rekik, Imperial College London</td></tr>
+        <tr><td class="t">60 min</td><td><strong>Contributed oral session</strong><br>Short oral presentations of accepted papers, spanning diagnosis, treatment, monitoring, and outcomes across both disease domains</td></tr>
+        <tr><td class="t">45 min</td><td><strong>Poster session</strong><br>Interactive poster presentations for the remaining accepted papers, including dataset and benchmark contributions</td></tr>
+        <tr><td class="t">30 min</td><td><strong>Benchmark / challenge session</strong> <span class="tbd">optional</span><br>Presentation of results from the associated benchmark challenge, if run in conjunction with the workshop</td></tr>
+        <tr><td class="t">10 min</td><td><strong>Closing remarks</strong><br>Summary, key takeaways, and community next steps</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SPEAKERS ========== -->
+<section id="speakers">
+  <div class="wrap">
+    <div class="eyebrow">Invited speakers</div>
+    <h2>Keynotes</h2>
+    <div class="grid g2">
+      <div class="card person">
+        <!-- Replace initials with: <img src="assets/bagci.webp" alt="Ulas Bagci"> -->
+        <div class="avatar">UB</div>
+        <div>
+          <h3>Ulas Bagci</h3>
+          <div class="aff">Northwestern University</div>
+          <p><strong>Keynote 1 — Multimodal AI</strong><br>Talk title and abstract <span class="tbd">TBD</span></p>
+        </div>
+      </div>
+      <div class="card person">
+        <!-- Replace initials with: <img src="assets/rekik.jpg" alt="Islem Rekik"> -->
+        <div class="avatar">IR</div>
+        <div>
+          <h3>Islem Rekik</h3>
+          <div class="aff">Imperial College London</div>
+          <p><strong>Keynote 2 — Graph Neural Networks</strong><br>Talk title and abstract <span class="tbd">TBD</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CHALLENGE ========== -->
+<section id="challenge">
+  <div class="wrap">
+    <div class="challenge-head">
+      <div class="eyebrow" style="margin:0">Benchmark challenge</div>
+      <span class="tbd">Details in preparation</span>
+    </div>
+    <h2 style="margin-top:.4em">TrustMedAI Challenge 2027</h2>
+    <p class="lead">A benchmark challenge run alongside the workshop to address data scarcity and reproducibility gaps in underserved neurological and cardiac applications — evaluated not only on accuracy but on calibration, robustness, and fairness.</p>
+
+    <div class="grid g3" style="margin-top:28px">
+      <div class="card">
+        <h3>Task</h3>
+        <p>Clinical problem, modality, and target (e.g., segmentation, classification, outcome prediction) <span class="tbd">TBD</span></p>
+      </div>
+      <div class="card">
+        <h3>Data</h3>
+        <p>Source cohorts, number of cases, institutions, annotation protocol, and license <span class="tbd">TBD</span></p>
+      </div>
+      <div class="card">
+        <h3>Evaluation</h3>
+        <p>Primary task metric plus trustworthiness metrics — e.g., calibration (ECE), cross-site generalization, subgroup performance <span class="tbd">TBD</span></p>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:20px">
+      <div class="card">
+        <h3>How to participate</h3>
+        <ol class="clean" style="padding-left:1.2em">
+          <li>Register your team <span class="tbd">form link TBD</span></li>
+          <li>Sign the data use agreement and download training data</li>
+          <li>Submit predictions on the hidden test set <span class="tbd">platform TBD</span></li>
+          <li>Submit a short method description / challenge paper by 26 Feb 2027</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h3>Rules &amp; awards</h3>
+        <ul class="clean">
+          <li>Use of external data and pretrained models <span class="tbd">TBD</span></li>
+          <li>Maximum number of test submissions <span class="tbd">TBD</span></li>
+          <li>Code release requirement for ranked teams <span class="tbd">TBD</span></li>
+          <li>Prizes and certificates <span class="tbd">TBD</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>Challenge lead:</strong> <a href="https://scholar.google.com/citations?user=7dw-9YgAAAAJ&amp;hl=en" target="_blank" rel="noopener">Jamil Ahmad</a> (United Arab Emirates University) — <a href="mailto:jamil.ahmad@uaeu.ac.ae">jamil.ahmad@uaeu.ac.ae</a>
+    </div>
+
+    <div class="notice">
+      <strong>Leaderboard.</strong> Results will be posted here after the test phase closes.
+    </div>
+  </div>
+</section>
+
+<!-- ========== ORGANIZERS ========== -->
+<section id="organizers">
+  <div class="wrap">
+    <div class="eyebrow">Organizing committee</div>
+    <h2>Organizers</h2>
+    <div class="grid g2">
+      <div class="card person">
+        <div class="avatar">KM</div>
+        <div>
+          <h3><a href="https://experts.umich.edu/11932-khalid-malik" target="_blank" rel="noopener">Khalid M. Malik</a></h3>
+          <div class="aff">University of Michigan-Flint</div>
+          <p>Professor of Computer Science and Director of Cybersecurity. His research spans multimodal, federated, trustworthy, and neuro-symbolic AI, with a healthcare focus on predicting cerebrovascular and cardiovascular events from clinical text and imaging such as DSA and MRA.</p>
+        </div>
+      </div>
+      <div class="card person">
+        <div class="avatar">SA</div>
+        <div>
+          <h3><a href="https://research.childrensnational.org/people/anwar-syed-muhammad" target="_blank" rel="noopener">Syed Muhammad Anwar</a></h3>
+          <div class="aff">Children's National Hospital · George Washington University</div>
+          <p>Professor of Radiology and Pediatrics and principal investigator at the Sheikh Zayed Institute for Pediatric Surgical Innovation. His work develops computer vision and AI solutions for healthcare, with 100+ peer-reviewed publications.</p>
+        </div>
+      </div>
+      <div class="card person">
+        <!-- Replace initials with: <img src="assets/ahmad.jpg" alt="Jamil Ahmad"> -->
+        <div class="avatar">JA</div>
+        <div>
+          <h3><a href="https://scholar.google.com/citations?user=7dw-9YgAAAAJ&amp;hl=en" target="_blank" rel="noopener">Jamil Ahmad</a></h3>
+          <div class="aff">Challenge Lead · College of Computing and Artificial Intelligence, United Arab Emirates University</div>
+          <p>Leads the design, data curation, and evaluation of the TrustMedAI 2027 benchmark challenge. Short bio <span class="tbd">TBD</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROGRAM COMMITTEE ========== -->
+<section id="committee">
+  <div class="wrap">
+    <div class="eyebrow">Advisors</div>
+    <h2>Advisory Committee</h2>
+    <div class="table-scroll">
+    <table class="table">
+      <thead><tr><th>Name</th><th>Affiliation</th></tr></thead>
+      <tbody>
+        <!-- One row per member: <tr><td>Name</td><td>Affiliation</td></tr> -->
+        <tr><td>Marius George Linguraru</td><td>Children's National Hospital, Washington, DC, USA</td></tr>
+        <tr><td>Hamid Soltanian-Zadeh, PhD</td><td><span class="tbd">TBD</span></td></tr>
+        <tr><td>Ghaus Malik</td><td>Vice Chair, Neurosurgery, Henry Ford Hospital, MI, USA</td></tr>
+        <tr><td>Syed Ather Enam</td><td>Professor of Neurosurgery, Aga Khan University, Pakistan</td></tr>
+        <tr><td>Aditya Pandey</td><td>Neurosurgery, University of Michigan, MI, USA</td></tr>
+        <tr><td>Salman Khan</td><td><span class="tbd">TBD</span></td></tr>
+        <tr><td>Pouya Entezami</td><td>Neurosurgery, Henry Ford Hospital, MI, USA</td></tr>
+        <tr><td>Qasim Bashir</td><td>Neurosurgery, King Edward Medical College, Lahore, Pakistan</td></tr>
+        <tr><td>Lillian Su</td><td><span class="tbd">TBD</span></td></tr>
+        <tr><td>William Gaillard</td><td><span class="tbd">TBD</span></td></tr>
+        <tr><td>Natasha Lepore</td><td>Children's Hospital Los Angeles (CHLA), CA, USA</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PROGRAM COMMITTEE ========== -->
+<section id="pc">
+  <div class="wrap">
+    <div class="eyebrow">Reviewers</div>
+    <h2>Program Committee</h2>
+    <div class="table-scroll">
+    <table class="table">
+      <thead><tr><th>Name</th><th>Affiliation</th></tr></thead>
+      <tbody>
+        <!-- Alphabetical by last name. One row per member: <tr><td>Name</td><td>Affiliation</td></tr> -->
+        <tr><td>Jamil Ahmad</td><td>United Arab Emirates University, UAE</td></tr>
+        <tr><td>Usman Akram</td><td>National University of Sciences and Technology (NUST), Pakistan</td></tr>
+        <tr><td>Alaa Aljiffry, MD</td><td>Children's National Hospital, Washington, DC, USA</td></tr>
+        <tr><td>Pouya Entezami</td><td>Neurosurgery, Henry Ford Hospital, MI, USA</td></tr>
+        <tr><td>Adnan Haider</td><td>University of Ulsan, South Korea</td></tr>
+        <tr><td>Ijaz ul Haq</td><td>University of Michigan, MI, USA</td></tr>
+        <tr><td>Kritika Iyer</td><td>Children's National Hospital, Washington, DC, USA</td></tr>
+        <tr><td>Cemal Karakas</td><td>Children's National Hospital, Washington, DC, USA</td></tr>
+        <tr><td>Ufaq Khan</td><td>Mohamed bin Zayed University of Artificial Intelligence (MBZUAI), UAE</td></tr>
+        <tr><td>Ghazaleh Khodabandelou</td><td>Université Paris-Est Créteil (UPEC), France</td></tr>
+        <tr><td>Seung Gu Kim</td><td>Dotter Inc., South Korea</td></tr>
+        <tr><td>Sravanthi Koduri</td><td>Neurosurgery, University of Michigan, MI, USA</td></tr>
+        <tr><td>Muhammad Majid</td><td>International Islamic University</td></tr>
+        <tr><td>Aftab Maqsud</td><td>Neuroradiologist</td></tr>
+        <tr><td>Abhijeet Parida</td><td>Children's National Hospital, Washington, DC, USA</td></tr>
+        <tr><td>Adjanie Patabendige</td><td>University of Derby, UK</td></tr>
+        <tr><td>Nasir Rahim</td><td>Yale School of Medicine, CT, USA</td></tr>
+        <tr><td>Leigh Sepeta</td><td>Children's National Hospital, Washington, DC, USA</td></tr>
+        <tr><td>Mohammad-Reza Siadat</td><td>Oakland University, MI, USA</td></tr>
+        <tr><td>Kutub Uddin</td><td>University of Michigan, MI, USA</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Contact</div>
+    <h2>Questions?</h2>
+    <p class="lead">Reach the organizers at <a href="mailto:drmalik@umich.edu">drmalik@umich.edu</a> or <a href="mailto:sanwar@childrensnational.org">sanwar@childrensnational.org</a>.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    TrustMedAI 2027 · A workshop and challenge held in conjunction with
+    <a href="https://biomedicalimaging.org/2027/" target="_blank" rel="noopener">IEEE ISBI 2027</a>, Lausanne, Switzerland.
+  </div>
+</footer>
+
+<script>
+  // Close mobile menu on link click and highlight the current section in the nav
+  const list = document.getElementById('navlist');
+  const links = [...list.querySelectorAll('a')];
+  links.forEach(a => a.addEventListener('click', () => list.classList.remove('open')));
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id));
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+</script>
+</body>
+</html>
