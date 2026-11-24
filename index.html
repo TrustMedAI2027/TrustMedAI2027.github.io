@@ -99,7 +99,13 @@ ul.clean li{margin-bottom:.35em}
 /* People */
 .person{display:flex;gap:16px;align-items:flex-start}
 .avatar{flex:0 0 72px;height:72px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line);display:grid;place-items:center;font-weight:700;color:var(--ink-2);overflow:hidden}
-.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar{position:relative}
+.avatar img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.people{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.person.sm{padding:16px;align-items:center}
+.person.sm .avatar{flex-basis:60px;height:60px;font-size:.9rem}
+.person.sm h3{font-size:1rem;margin-bottom:.2em}
+.person.sm .aff{font-size:.85rem;margin:0;line-height:1.45}
 .person .aff{color:var(--ink-2);font-size:.92rem;margin-bottom:.5em}
 
 /* Challenge band */
@@ -128,8 +134,7 @@ footer a{color:var(--neuro)}
     <a class="brand" href="#top">TrustMed<span>AI</span> 2027</a>
     <button class="menu-btn" aria-label="Menu" onclick="document.getElementById('navlist').classList.toggle('open')">Menu</button>
     <ul id="navlist">
-      <li><a href="#about">About</a></li>
-      <li><a href="#topics">Topics</a></li>
+            <li><a href="#topics">Topics</a></li>
       <li><a href="#cfp">Call for Papers</a></li>
       <li><a href="#dates">Dates</a></li>
       <li><a href="#program">Program</a></li>
@@ -149,8 +154,8 @@ footer a{color:var(--neuro)}
     <h1>TrustMedAI 2027</h1>
     <p class="sub">Multimodal and Trustworthy AI for Neurological and Cardiac Disorders</p>
     <div class="meta">
-      <div><b>When</b> · Half-day, during ISBI 2027 (25–28 May 2027) <span class="tbd">exact day TBD</span></div>
-      <div><b>Where</b> · SwissTech Convention Center, EPFL, Lausanne, Switzerland</div>
+      <div><b>When</b> · 25–28 May 2027 <span class="tbd">day TBD</span></div>
+      <div><b>Where</b> · EPFL, Lausanne</div>
     </div>
     <div class="btns">
       <a class="btn primary" href="#cfp">Submit a paper</a>
@@ -158,34 +163,18 @@ footer a{color:var(--neuro)}
       <a class="btn ghost" href="https://biomedicalimaging.org/2027/" target="_blank" rel="noopener">ISBI 2027 ↗</a>
     </div>
     <div class="chips">
-      <span class="chip n">Stroke &amp; cerebrovascular</span>
-      <span class="chip n">Neurodegeneration · Epilepsy · Brain tumors</span>
-      <span class="chip c">Heart failure · Arrhythmia</span>
-      <span class="chip c">Structural heart disease</span>
+      <span class="chip n">Neuro</span>
+      <span class="chip c">Cardiac</span>
     </div>
   </div>
 </section>
 
 <!-- ========== ABOUT ========== -->
 <section id="about">
-  <div class="wrap split">
-    <div>
-      <div class="eyebrow">About the workshop</div>
-      <h2>From accurate models to clinically trustworthy ones</h2>
-      <p class="lead">Neurological and cardiac disorders are among the leading causes of death and disability worldwide, yet many remain hard to diagnose early, monitor over time, and treat effectively.</p>
-      <p>TrustMedAI brings the biomedical imaging community together with neurologists, cardiologists, neuroradiologists, interventional radiologists, neurosurgeons, cardiac surgeons, and imaging scientists. Our focus is AI that is multimodal, robust across institutions and populations, interpretable, uncertainty-aware, fair, and ready for high-stakes clinical use.</p>
-      <p>We give special attention to areas that have received comparatively little attention from the AI community — <strong>stroke and cerebrovascular disease</strong> on the neurological side, and <strong>heart failure, arrhythmia, and structural heart disease</strong> on the cardiac side — and we treat datasets and benchmarks as first-class contributions.</p>
-    </div>
-    <div class="grid">
-      <div class="card">
-        <h3>Modalities</h3>
-        <p>MRI, CT, PET, ultrasound &amp; echocardiography, angiography (DSA, MRA, CTA, coronary), digital pathology, and video-based assessment.</p>
-      </div>
-      <div class="card">
-        <h3>Fused with</h3>
-        <p>Biosignals (EEG, ECG), genomics, laboratory data, EHRs and clinical notes — via vision-language, foundation, and world models.</p>
-      </div>
-    </div>
+  <div class="wrap">
+    <div class="eyebrow">About</div>
+    <h2>From accurate to clinically trustworthy AI</h2>
+    <p class="lead">Multimodal, robust, interpretable, and uncertainty-aware AI for neurological and cardiac care, bringing together imaging scientists and clinicians.</p>
   </div>
 </section>
 
@@ -193,8 +182,7 @@ footer a{color:var(--neuro)}
 <section id="imaging">
   <div class="wrap">
     <div class="eyebrow">Imaging in focus</div>
-    <h2>Angiography meets trustworthy AI</h2>
-    <p class="lead">Vascular imaging is central to both disease domains. We want models that find what matters on MR and CT angiography and also say how sure they are.</p>
+    <h2>AI that knows how sure it is</h2>
     <div class="figs">
       <figure class="img">
         <!-- To use a real image: replace this <svg> with <img src="assets/mra.jpg" alt="MR angiography of the circle of Willis"> -->
@@ -231,7 +219,7 @@ footer a{color:var(--neuro)}
             <text x="388" y="290" fill="#9a9a9a" font-size="11" text-anchor="end">L</text>
           </g>
         </svg>
-        <figcaption><span class="mod n">Neuro</span><strong>MR angiography: circle of Willis</strong>Aneurysm detection on a maximum intensity projection, reported with a calibrated confidence rather than a bare label.</figcaption>
+        <figcaption><span class="mod n">Neuro</span><strong>MR angiography</strong>Aneurysm detection with calibrated confidence</figcaption>
       </figure>
       <figure class="img">
         <!-- To use a real image: replace this <svg> with <img src="assets/ccta.jpg" alt="Coronary CT angiography volume rendering"> -->
@@ -268,32 +256,31 @@ footer a{color:var(--neuro)}
             <text x="12" y="20" fill="#9a9a9a" font-size="11">Ao</text>
           </g>
         </svg>
-        <figcaption><span class="mod c">Cardiac</span><strong>Coronary CT angiography</strong>Stenosis grading on a volume rendering, with an uncertainty interval that supports deferral to a clinician when the model is unsure.</figcaption>
+        <figcaption><span class="mod c">Cardiac</span><strong>Coronary CT angiography</strong>Stenosis grading with uncertainty</figcaption>
       </figure>
     </div>
-    <p class="fine">Illustrative schematics, not patient data. AI outputs shown are examples.</p>
+    <p class="fine">Illustrative schematics.</p>
   </div>
 </section>
 
 <!-- ========== TOPICS ========== -->
 <section id="topics">
   <div class="wrap">
-    <div class="eyebrow">Scope</div>
-    <h2>Across the full clinical pipeline</h2>
+    <div class="eyebrow">Topics</div>
+    <h2>Diagnosis to outcomes</h2>
     <div class="pipeline">
-      <div><strong>Diagnosis &amp; early detection</strong>Biomarkers, staging, risk prediction, deferral to clinicians</div>
-      <div><strong>Treatment &amp; intervention</strong>Segmentation, procedural planning, image-guided and intra-operative imaging</div>
-      <div><strong>Management &amp; monitoring</strong>Longitudinal modeling, VLM reporting, stroke and cardiac care units</div>
-      <div><strong>Outcomes &amp; recovery</strong>Rehabilitation, survival, treatment response, complications</div>
+      <div><strong>Diagnosis</strong></div>
+      <div><strong>Treatment</strong></div>
+      <div><strong>Monitoring</strong></div>
+      <div><strong>Outcomes</strong></div>
     </div>
-    <h3 style="margin-top:40px">Six main directions</h3>
-    <div class="grid g3">
-      <div class="card"><div class="num">01</div><h3>Multimodal AI</h3><p>Fusion of imaging, signals, genomics and records for neurological and cardiac disorders.</p></div>
-      <div class="card"><div class="num">02</div><h3>Neurosymbolic &amp; knowledge-guided AI</h3><p>Combining learning with guidelines, anatomical and physiological constraints, and causal reasoning.</p></div>
-      <div class="card"><div class="num">03</div><h3>Trustworthy &amp; explainable AI</h3><p>Uncertainty quantification, calibration, interpretability, fairness and bias auditing.</p></div>
-      <div class="card"><div class="num">04</div><h3>Diagnosis-to-outcomes continuum</h3><p>AI that follows the patient from detection through treatment to recovery.</p></div>
-      <div class="card"><div class="num">05</div><h3>Datasets, benchmarks &amp; generalization</h3><p>New cohorts, annotation protocols, and evaluation across institutions and populations.</p></div>
-      <div class="card"><div class="num">06</div><h3>Translation &amp; human–AI collaboration</h3><p>Verification, validation, regulatory readiness, deployment and trust calibration.</p></div>
+    <div class="grid g3" style="margin-top:28px">
+      <div class="card"><div class="num">01</div><h3>Multimodal AI</h3></div>
+      <div class="card"><div class="num">02</div><h3>Neurosymbolic &amp; knowledge-guided AI</h3></div>
+      <div class="card"><div class="num">03</div><h3>Trustworthy &amp; explainable AI</h3></div>
+      <div class="card"><div class="num">04</div><h3>Diagnosis-to-outcomes continuum</h3></div>
+      <div class="card"><div class="num">05</div><h3>Datasets &amp; benchmarks</h3></div>
+      <div class="card"><div class="num">06</div><h3>Clinical translation</h3></div>
     </div>
   </div>
 </section>
@@ -302,43 +289,28 @@ footer a{color:var(--neuro)}
 <section id="cfp">
   <div class="wrap">
     <div class="eyebrow">Call for papers</div>
-    <h2>What we're looking for</h2>
-    <p class="lead">We welcome work that bridges methodological advances with clinically meaningful problems, and that evaluates models beyond accuracy — by calibration, generalization, fairness, robustness, interpretability, and deployment readiness.</p>
-    <div class="grid g2" style="margin-top:28px">
+    <h2>Methods, datasets &amp; benchmarks</h2>
+    <div class="grid g2">
       <div class="card neuro">
-        <h3>Neurological focus</h3>
+        <h3>Neuro</h3>
         <ul class="clean">
-          <li>Stroke and cerebrovascular disease (aneurysm, ischemic and hemorrhagic stroke)</li>
-          <li>Neurodegenerative disorders and dementia</li>
+          <li>Stroke &amp; cerebrovascular disease</li>
+          <li>Neurodegeneration &amp; dementia</li>
           <li>Epilepsy</li>
-          <li>Brain tumors and neuro-oncology</li>
-          <li>Other neurological conditions</li>
+          <li>Brain tumors</li>
         </ul>
       </div>
       <div class="card cardio">
-        <h3>Cardiac focus</h3>
+        <h3>Cardiac</h3>
         <ul class="clean">
           <li>Heart failure</li>
-          <li>Arrhythmia and electrophysiological interventions</li>
-          <li>Structural heart disease and repair</li>
+          <li>Arrhythmia</li>
+          <li>Structural heart disease</li>
           <li>Coronary artery disease</li>
         </ul>
       </div>
     </div>
-    <div class="grid g3" style="margin-top:20px">
-      <div class="card">
-        <h3>Methods</h3>
-        <p>Multimodal fusion; foundation and vision-language models; domain adaptation; uncertainty; explainability; federated and privacy-preserving learning; robustness to distribution shift; causal, neurosymbolic and world-model approaches.</p>
-      </div>
-      <div class="card">
-        <h3>Datasets &amp; benchmarks</h3>
-        <p>Reviewed on equal footing with methods papers, judged on clinical relevance, data quality, documentation, annotation rigor, licensing and accessibility, reproducibility, and community reuse.</p>
-      </div>
-      <div class="card">
-        <h3>Submission format</h3>
-        <p>Page limit, template, and review process <span class="tbd">TBD</span><br>Submission portal: <span class="tbd">link TBD</span><br>Proceedings: <span class="tbd">TBD</span></p>
-      </div>
-    </div>
+    <p class="fine">Format, template &amp; submission link <span class="tbd">TBD</span></p>
   </div>
 </section>
 
@@ -347,18 +319,18 @@ footer a{color:var(--neuro)}
   <div class="wrap">
     <div class="eyebrow">Important dates</div>
     <h2>Timeline</h2>
-    <p class="lead">All deadlines 11:59 pm US Eastern Time, following ISBI 2027.</p>
+    <p class="fine" style="margin:0 0 16px">11:59 pm US Eastern</p>
     <div class="table-scroll">
     <table class="table">
       <thead><tr><th>Date</th><th>Workshop</th><th>Challenge</th></tr></thead>
       <tbody>
         <tr><td class="t"><span class="tbd">TBD</span></td><td>Call for papers opens</td><td>Training data released</td></tr>
-        <tr><td class="t">26 Jan 2027</td><td>Workshop paper submission (ISBI deadline)</td><td>—</td></tr>
-        <tr><td class="t"><span class="tbd">TBD</span></td><td>Author notification</td><td>Test data / submission phase opens</td></tr>
-        <tr><td class="t">26 Feb 2027</td><td>—</td><td>Challenge paper submission (ISBI deadline)</td></tr>
+        <tr><td class="t">26 Jan 2027</td><td>Paper submission</td><td>—</td></tr>
+        <tr><td class="t"><span class="tbd">TBD</span></td><td>Author notification</td><td>Test phase opens</td></tr>
+        <tr><td class="t">26 Feb 2027</td><td>—</td><td>Challenge paper</td></tr>
         <tr><td class="t">1 Mar 2027</td><td>—</td><td>Challenge paper notification</td></tr>
         <tr><td class="t">15 Mar 2027</td><td>Camera-ready <span class="tbd">confirm</span></td><td>Challenge final submission</td></tr>
-        <tr><td class="t">25–28 May 2027</td><td colspan="2">Workshop &amp; challenge session at ISBI 2027, Lausanne</td></tr>
+        <tr><td class="t">25–28 May 2027</td><td colspan="2">Workshop at ISBI 2027</td></tr>
       </tbody>
     </table>
     </div>
@@ -370,18 +342,17 @@ footer a{color:var(--neuro)}
   <div class="wrap">
     <div class="eyebrow">Program</div>
     <h2>Half-day schedule</h2>
-    <p class="lead">Tentative. Times will be fixed once ISBI assigns the session slot.</p>
     <div class="table-scroll">
     <table class="table">
       <thead><tr><th>Duration</th><th>Session</th></tr></thead>
       <tbody>
-        <tr><td class="t">10 min</td><td><strong>Opening remarks</strong><br>Scope, motivation, and format overview by the organizers</td></tr>
+        <tr><td class="t">10 min</td><td><strong>Opening remarks</strong></td></tr>
         <tr><td class="t">25 min</td><td><strong>Keynote 1 — Multimodal AI</strong><br>Ulas Bagci, Northwestern University</td></tr>
         <tr><td class="t">25 min</td><td><strong>Keynote 2 — Graph Neural Networks</strong><br>Islem Rekik, Imperial College London</td></tr>
-        <tr><td class="t">60 min</td><td><strong>Contributed oral session</strong><br>Short oral presentations of accepted papers, spanning diagnosis, treatment, monitoring, and outcomes across both disease domains</td></tr>
-        <tr><td class="t">45 min</td><td><strong>Poster session</strong><br>Interactive poster presentations for the remaining accepted papers, including dataset and benchmark contributions</td></tr>
-        <tr><td class="t">30 min</td><td><strong>Benchmark / challenge session</strong> <span class="tbd">optional</span><br>Presentation of results from the associated benchmark challenge, if run in conjunction with the workshop</td></tr>
-        <tr><td class="t">10 min</td><td><strong>Closing remarks</strong><br>Summary, key takeaways, and community next steps</td></tr>
+        <tr><td class="t">60 min</td><td><strong>Oral session</strong></td></tr>
+        <tr><td class="t">45 min</td><td><strong>Poster session</strong></td></tr>
+        <tr><td class="t">30 min</td><td><strong>Challenge results</strong> <span class="tbd">optional</span></td></tr>
+        <tr><td class="t">10 min</td><td><strong>Closing remarks</strong></td></tr>
       </tbody>
     </table>
     </div>
@@ -395,21 +366,19 @@ footer a{color:var(--neuro)}
     <h2>Keynotes</h2>
     <div class="grid g2">
       <div class="card person">
-        <!-- Replace initials with: <img src="assets/bagci.webp" alt="Ulas Bagci"> -->
-        <div class="avatar">UB</div>
+        <div class="avatar" data-photo="ulas-bagci" data-name="Ulas Bagci">UB</div>
         <div>
           <h3>Ulas Bagci</h3>
           <div class="aff">Northwestern University</div>
-          <p><strong>Keynote 1 — Multimodal AI</strong><br>Talk title and abstract <span class="tbd">TBD</span></p>
+          <p><strong>Keynote 1 — Multimodal AI</strong></p>
         </div>
       </div>
       <div class="card person">
-        <!-- Replace initials with: <img src="assets/rekik.jpg" alt="Islem Rekik"> -->
-        <div class="avatar">IR</div>
+        <div class="avatar" data-photo="islem-rekik" data-name="Islem Rekik">IR</div>
         <div>
           <h3>Islem Rekik</h3>
           <div class="aff">Imperial College London</div>
-          <p><strong>Keynote 2 — Graph Neural Networks</strong><br>Talk title and abstract <span class="tbd">TBD</span></p>
+          <p><strong>Keynote 2 — Graph Neural Networks</strong></p>
         </div>
       </div>
     </div>
@@ -419,55 +388,16 @@ footer a{color:var(--neuro)}
 <!-- ========== CHALLENGE ========== -->
 <section id="challenge">
   <div class="wrap">
-    <div class="challenge-head">
-      <div class="eyebrow" style="margin:0">Benchmark challenge</div>
-      <span class="tbd">Details in preparation</span>
+    <div class="eyebrow">Challenge</div>
+    <h2>TrustMedAI Challenge 2027</h2>
+    <p class="lead">Scored on accuracy, calibration, robustness and fairness.</p>
+    <div class="grid g3" style="margin-top:24px">
+      <div class="card"><h3>Task</h3><span class="tbd">TBD</span></div>
+      <div class="card"><h3>Data</h3><span class="tbd">TBD</span></div>
+      <div class="card"><h3>Register</h3><span class="tbd">Link TBD</span></div>
     </div>
-    <h2 style="margin-top:.4em">TrustMedAI Challenge 2027</h2>
-    <p class="lead">A benchmark challenge run alongside the workshop to address data scarcity and reproducibility gaps in underserved neurological and cardiac applications — evaluated not only on accuracy but on calibration, robustness, and fairness.</p>
-
-    <div class="grid g3" style="margin-top:28px">
-      <div class="card">
-        <h3>Task</h3>
-        <p>Clinical problem, modality, and target (e.g., segmentation, classification, outcome prediction) <span class="tbd">TBD</span></p>
-      </div>
-      <div class="card">
-        <h3>Data</h3>
-        <p>Source cohorts, number of cases, institutions, annotation protocol, and license <span class="tbd">TBD</span></p>
-      </div>
-      <div class="card">
-        <h3>Evaluation</h3>
-        <p>Primary task metric plus trustworthiness metrics — e.g., calibration (ECE), cross-site generalization, subgroup performance <span class="tbd">TBD</span></p>
-      </div>
-    </div>
-
-    <div class="grid g2" style="margin-top:20px">
-      <div class="card">
-        <h3>How to participate</h3>
-        <ol class="clean" style="padding-left:1.2em">
-          <li>Register your team <span class="tbd">form link TBD</span></li>
-          <li>Sign the data use agreement and download training data</li>
-          <li>Submit predictions on the hidden test set <span class="tbd">platform TBD</span></li>
-          <li>Submit a short method description / challenge paper by 26 Feb 2027</li>
-        </ol>
-      </div>
-      <div class="card">
-        <h3>Rules &amp; awards</h3>
-        <ul class="clean">
-          <li>Use of external data and pretrained models <span class="tbd">TBD</span></li>
-          <li>Maximum number of test submissions <span class="tbd">TBD</span></li>
-          <li>Code release requirement for ranked teams <span class="tbd">TBD</span></li>
-          <li>Prizes and certificates <span class="tbd">TBD</span></li>
-        </ul>
-      </div>
-    </div>
-
     <div class="notice">
-      <strong>Challenge lead:</strong> <a href="https://scholar.google.com/citations?user=7dw-9YgAAAAJ&amp;hl=en" target="_blank" rel="noopener">Jamil Ahmad</a> (United Arab Emirates University) — <a href="mailto:jamil.ahmad@uaeu.ac.ae">jamil.ahmad@uaeu.ac.ae</a>
-    </div>
-
-    <div class="notice">
-      <strong>Leaderboard.</strong> Results will be posted here after the test phase closes.
+      <strong>Lead:</strong> <a href="https://scholar.google.com/citations?user=7dw-9YgAAAAJ&amp;hl=en" target="_blank" rel="noopener">Jamil Ahmad</a> · <a href="mailto:jamil.ahmad@uaeu.ac.ae">jamil.ahmad@uaeu.ac.ae</a>
     </div>
   </div>
 </section>
@@ -477,30 +407,26 @@ footer a{color:var(--neuro)}
   <div class="wrap">
     <div class="eyebrow">Organizing committee</div>
     <h2>Organizers</h2>
-    <div class="grid g2">
+    <div class="grid g3">
       <div class="card person">
-        <div class="avatar">KM</div>
+        <div class="avatar" data-photo="khalid-malik" data-name="Khalid M. Malik">KM</div>
         <div>
           <h3><a href="https://experts.umich.edu/11932-khalid-malik" target="_blank" rel="noopener">Khalid M. Malik</a></h3>
-          <div class="aff">University of Michigan-Flint</div>
-          <p>Professor of Computer Science and Director of Cybersecurity. His research spans multimodal, federated, trustworthy, and neuro-symbolic AI, with a healthcare focus on predicting cerebrovascular and cardiovascular events from clinical text and imaging such as DSA and MRA.</p>
+          <div class="aff">Professor · University of Michigan-Flint</div>
         </div>
       </div>
       <div class="card person">
-        <div class="avatar">SA</div>
+        <div class="avatar" data-photo="syed-anwar" data-name="Syed Muhammad Anwar">SA</div>
         <div>
           <h3><a href="https://research.childrensnational.org/people/anwar-syed-muhammad" target="_blank" rel="noopener">Syed Muhammad Anwar</a></h3>
-          <div class="aff">Children's National Hospital · George Washington University</div>
-          <p>Professor of Radiology and Pediatrics and principal investigator at the Sheikh Zayed Institute for Pediatric Surgical Innovation. His work develops computer vision and AI solutions for healthcare, with 100+ peer-reviewed publications.</p>
+          <div class="aff">Professor · Children's National Hospital</div>
         </div>
       </div>
       <div class="card person">
-        <!-- Replace initials with: <img src="assets/ahmad.jpg" alt="Jamil Ahmad"> -->
-        <div class="avatar">JA</div>
+        <div class="avatar" data-photo="jamil-ahmad" data-name="Jamil Ahmad">JA</div>
         <div>
           <h3><a href="https://scholar.google.com/citations?user=7dw-9YgAAAAJ&amp;hl=en" target="_blank" rel="noopener">Jamil Ahmad</a></h3>
-          <div class="aff">Challenge Lead · College of Computing and Artificial Intelligence, United Arab Emirates University</div>
-          <p>Leads the design, data curation, and evaluation of the TrustMedAI 2027 benchmark challenge. Short bio <span class="tbd">TBD</span></p>
+          <div class="aff">Challenge Lead · United Arab Emirates University</div>
         </div>
       </div>
     </div>
@@ -512,25 +438,20 @@ footer a{color:var(--neuro)}
   <div class="wrap">
     <div class="eyebrow">Advisors</div>
     <h2>Advisory Committee</h2>
-    <div class="table-scroll">
-    <table class="table">
-      <thead><tr><th>Name</th><th>Affiliation</th></tr></thead>
-      <tbody>
-        <!-- One row per member: <tr><td>Name</td><td>Affiliation</td></tr> -->
-        <tr><td>Marius George Linguraru</td><td>Children's National Hospital, Washington, DC, USA</td></tr>
-        <tr><td>Hamid Soltanian-Zadeh, PhD</td><td><span class="tbd">TBD</span></td></tr>
-        <tr><td>Ghaus Malik</td><td>Vice Chair, Neurosurgery, Henry Ford Hospital, MI, USA</td></tr>
-        <tr><td>Syed Ather Enam</td><td>Professor of Neurosurgery, Aga Khan University, Pakistan</td></tr>
-        <tr><td>Aditya Pandey</td><td>Neurosurgery, University of Michigan, MI, USA</td></tr>
-        <tr><td>Salman Khan</td><td><span class="tbd">TBD</span></td></tr>
-        <tr><td>Pouya Entezami</td><td>Neurosurgery, Henry Ford Hospital, MI, USA</td></tr>
-        <tr><td>Qasim Bashir</td><td>Neurosurgery, King Edward Medical College, Lahore, Pakistan</td></tr>
-        <tr><td>Lillian Su</td><td><span class="tbd">TBD</span></td></tr>
-        <tr><td>William Gaillard</td><td><span class="tbd">TBD</span></td></tr>
-        <tr><td>Natasha Lepore</td><td>Children's Hospital Los Angeles (CHLA), CA, USA</td></tr>
-      </tbody>
-    </table>
-    </div>
+    <div class="people">
+          <!-- Photos load from assets/people/<name>.jpg (or .png/.webp); initials show until a photo exists -->
+          <div class="card person sm"><div class="avatar" data-photo="marius-linguraru" data-name="Marius George Linguraru">ML</div><div><h3>Marius George Linguraru</h3><div class="aff">Children's National Hospital, Washington, DC, USA</div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="hamid-soltanian-zadeh" data-name="Hamid Soltanian-Zadeh">HS</div><div><h3>Hamid Soltanian-Zadeh, PhD</h3><div class="aff">Henry Ford Health, USA · University of Tehran, Iran</div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="ghaus-malik" data-name="Ghaus Malik">GM</div><div><h3>Ghaus Malik</h3><div class="aff">Vice Chair, Neurosurgery, Henry Ford Hospital, MI, USA</div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="syed-ather-enam" data-name="Syed Ather Enam">SE</div><div><h3>Syed Ather Enam</h3><div class="aff">Professor of Neurosurgery, Aga Khan University, Pakistan</div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="aditya-pandey" data-name="Aditya Pandey">AP</div><div><h3>Aditya Pandey</h3><div class="aff">Neurosurgery, University of Michigan, MI, USA</div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="salman-khan" data-name="Salman Khan">SK</div><div><h3>Salman Khan</h3><div class="aff"><span class="tbd">TBD</span></div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="pouya-entezami" data-name="Pouya Entezami">PE</div><div><h3>Pouya Entezami</h3><div class="aff">Neurosurgery, Henry Ford Hospital, MI, USA</div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="qasim-bashir" data-name="Qasim Bashir">QB</div><div><h3>Qasim Bashir</h3><div class="aff">Neurosurgery, King Edward Medical College, Lahore, Pakistan</div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="lillian-su" data-name="Lillian Su">LS</div><div><h3>Lillian Su</h3><div class="aff"><span class="tbd">TBD</span></div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="william-gaillard" data-name="William Gaillard">WG</div><div><h3>William Gaillard</h3><div class="aff"><span class="tbd">TBD</span></div></div></div>
+          <div class="card person sm"><div class="avatar" data-photo="natasha-lepore" data-name="Natasha Lepore">NL</div><div><h3>Natasha Lepore</h3><div class="aff">Children's Hospital Los Angeles (CHLA), CA, USA</div></div></div>
+        </div>
   </div>
 </section>
 
@@ -575,14 +496,13 @@ footer a{color:var(--neuro)}
   <div class="wrap">
     <div class="eyebrow">Contact</div>
     <h2>Questions?</h2>
-    <p class="lead">Reach the organizers at <a href="mailto:drmalik@umich.edu">drmalik@umich.edu</a> or <a href="mailto:sanwar@childrensnational.org">sanwar@childrensnational.org</a>.</p>
+    <p class="lead"><a href="mailto:drmalik@umich.edu">drmalik@umich.edu</a> · <a href="mailto:sanwar@childrensnational.org">sanwar@childrensnational.org</a></p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    TrustMedAI 2027 · A workshop and challenge held in conjunction with
-    <a href="https://biomedicalimaging.org/2027/" target="_blank" rel="noopener">IEEE ISBI 2027</a>, Lausanne, Switzerland.
+    TrustMedAI 2027 · <a href="https://biomedicalimaging.org/2027/" target="_blank" rel="noopener">IEEE ISBI 2027</a>, Lausanne
   </div>
 </footer>
 
@@ -599,6 +519,14 @@ footer a{color:var(--neuro)}
     });
   }, { rootMargin: '-40% 0px -55% 0px' });
   document.querySelectorAll('section[id]').forEach(s => obs.observe(s));
+  // Load headshots from assets/people/<slug>.(jpg|jpeg|png|webp); keep initials if none found
+  document.querySelectorAll('.avatar[data-photo]').forEach(a => {
+    const exts = ['jpg','jpeg','png','webp']; let i = 0;
+    const img = new Image(); img.alt = a.dataset.name || '';
+    img.onload = () => a.appendChild(img);
+    img.onerror = () => { if (++i < exts.length) img.src = `assets/people/${a.dataset.photo}.${exts[i]}`; };
+    img.src = `assets/people/${a.dataset.photo}.${exts[0]}`;
+  });
 </script>
 </body>
 </html>
